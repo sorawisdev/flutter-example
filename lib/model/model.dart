@@ -13,12 +13,32 @@ class WeatherInfo {
 
 class TemperatureInfo {
   final double? temperature;
+  final double? feel_like;
+  final double? temp_min;
+  final double? temp_max;
+  final double? humidity;
 
-  TemperatureInfo({this.temperature});
+  TemperatureInfo({
+    this.temperature,
+    this.temp_min,
+    this.temp_max,
+    this.feel_like,
+    this.humidity,
+  });
 
   factory TemperatureInfo.fromJson(Map<String, dynamic> json) {
     final temperature = json['temp'];
-    return TemperatureInfo(temperature: temperature);
+    final tempreaturemin = json['temp_min'];
+    final tempreaturemax = json['temp_max'];
+    final humidity = json['humidity'];
+    final feel_like = json['feels_like'];
+    return TemperatureInfo(
+      temperature: temperature,
+      feel_like: feel_like,
+      temp_min: tempreaturemin,
+      temp_max: tempreaturemax,
+      humidity: humidity,
+    );
   }
 }
 
@@ -35,12 +55,17 @@ class WeatherResponse {
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
     final cityName = json['name'];
+
     final tempInfoJson = json['main'];
     final tempInfo = TemperatureInfo.fromJson(tempInfoJson);
 
     final weatherInfoJson = json['weather'][0];
     final weatherInfo = WeatherInfo.fromJson(weatherInfoJson);
+
     return WeatherResponse(
-        cityName: cityName, tempInfo: tempInfo, weatherInfo: weatherInfo);
+      cityName: cityName,
+      tempInfo: tempInfo,
+      weatherInfo: weatherInfo,
+    );
   }
 }
