@@ -16,7 +16,7 @@ class TemperatureInfo {
   final double? feel_like;
   final double? temp_min;
   final double? temp_max;
-  final double? humidity;
+  final int? humidity;
 
   TemperatureInfo({
     this.temperature,
